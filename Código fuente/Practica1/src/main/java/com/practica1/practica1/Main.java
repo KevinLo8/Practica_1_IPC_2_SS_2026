@@ -4,13 +4,16 @@
 
 package com.practica1.practica1;
 
+import com.practica1.practica1.FrontEnd.Frame_Principal;
+
 /**
  *
  * @author Kevin
  */
-public class Practica1 {
+public class Main {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        Frame_Principal frame_Principal = new Frame_Principal();
+        frame_Principal.setVisible(true);
     }
 }
