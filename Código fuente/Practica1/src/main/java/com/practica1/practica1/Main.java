@@ -4,7 +4,7 @@
 
 package com.practica1.practica1;
 
-import com.practica1.practica1.FrontEnd.Frame_Principal;
+import com.practica1.practica1.FrontEnd.FramePrincipal;
 
 /**
  *
@@ -13,7 +13,7 @@ import com.practica1.practica1.FrontEnd.Frame_Principal;
 public class Main {
 
     public static void main(String[] args) {
-        Frame_Principal frame_Principal = new Frame_Principal();
+        FramePrincipal frame_Principal = new FramePrincipal();
         frame_Principal.setVisible(true);
     }
 }
