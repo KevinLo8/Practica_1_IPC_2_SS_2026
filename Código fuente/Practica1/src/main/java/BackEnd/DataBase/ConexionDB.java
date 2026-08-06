@@ -34,8 +34,6 @@ public class ConexionDB {
     }
 
     private void lanzarError(SQLException e, String mensaje) throws DataBaseException {
-        System.out.println(mensaje);
-        e.printStackTrace();
         throw new DataBaseException(mensaje);
     }
 }
