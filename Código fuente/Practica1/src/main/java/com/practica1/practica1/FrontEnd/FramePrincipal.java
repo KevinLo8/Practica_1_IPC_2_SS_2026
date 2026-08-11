@@ -5,6 +5,7 @@
 package com.practica1.practica1.FrontEnd;
 
 import com.practica1.practica1.FrontEnd.FrameEmpleados.InternalFrameEmpleados;
+import com.practica1.practica1.FrontEnd.FrameInsumos.InternalFrameInsumos;
 
 
 /**
@@ -114,6 +115,11 @@ public class FramePrincipal extends javax.swing.JFrame {
         jMenu2.add(nóminaItem);
 
         inventarioItem.setText("Inventario");
+        inventarioItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inventarioItemActionPerformed(evt);
+            }
+        });
         jMenu2.add(inventarioItem);
 
         MenúItem.setText("Menú");
@@ -167,6 +173,13 @@ public class FramePrincipal extends javax.swing.JFrame {
     private void salirItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirItemActionPerformed
         System.exit(0);
     }//GEN-LAST:event_salirItemActionPerformed
+
+    private void inventarioItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inventarioItemActionPerformed
+        InternalFrameInsumos frame = new InternalFrameInsumos();
+        frame.setLocation((jDesktopPane1.getWidth() - 700) / 2, (jDesktopPane1.getHeight() - 415) / 2);
+        jDesktopPane1.add(frame);
+        jDesktopPane1.repaint();
+    }//GEN-LAST:event_inventarioItemActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem MenúItem;
