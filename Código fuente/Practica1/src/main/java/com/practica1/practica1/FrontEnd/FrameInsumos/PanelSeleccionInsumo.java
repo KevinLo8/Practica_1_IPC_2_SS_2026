@@ -20,6 +20,7 @@ public class PanelSeleccionInsumo extends javax.swing.JPanel {
 
     /**
      * Creates new form PanelSeleccionInsumo
+     * @param frame
      */
     public PanelSeleccionInsumo(InternalFrameInsumos frame) {
         this.frame = frame;

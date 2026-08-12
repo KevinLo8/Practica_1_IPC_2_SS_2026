@@ -4,6 +4,12 @@
  */
 package com.practica1.practica1.FrontEnd.FrameInsumos;
 
+import BackEnd.CompraInsumo.*;
+import BackEnd.Exceptions.*;
+import BackEnd.Insumo.Insumo;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -12,23 +18,43 @@ import javax.swing.table.DefaultTableModel;
  */
 public class PanelCompraInsumo extends javax.swing.JPanel {
 
-    InternalFrameInsumos frame;
+    private InternalFrameInsumos frame;
+    private CompraInsumo compra;
+    private final DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+
     /**
      * Creates new form PanelCompraInsumo
+     * @param frame
+     * @param compraInsumo
      */
-    public PanelCompraInsumo(InternalFrameInsumos frame) {
+    public PanelCompraInsumo(InternalFrameInsumos frame, CompraInsumo compraInsumo) {
         this.frame = frame;
+        try {
+            if (compraInsumo == null) {
+                compra = new CompraInsumo(frame.operadorCompra.crearCodigoCompra(frame.databaseCompra));
+            } else {
+                compra = compraInsumo;
+            }
+        } catch (DataBaseException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "error", JOptionPane.ERROR_MESSAGE);
+        }
         initComponents();
+        crearTabla();
+        fechaField.setText(compra.getFecha().format(formato));
+
     }
 
-    
-    public void agregarInsumo(String codigo, String nombre, String cantidad, String costo) {
+    public void crearTabla() {
+        DetalleCompra[] detalleCompras = compra.getDetalleCompras();
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-        Object[] nuevaFila = {codigo, nombre, cantidad, costo};
-        modelo.addRow(nuevaFila);
+        for (DetalleCompra detalleCompra : detalleCompras) {
+            Object[] nuevaFila = {detalleCompra.getCodigoInsumo(), detalleCompra.getNombreInsumo(), detalleCompra.getCantidad(), detalleCompra.getCosto()};
+            modelo.addRow(nuevaFila);
+        }
         jTable1.setModel(modelo);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,15 +65,19 @@ public class PanelCompraInsumo extends javax.swing.JPanel {
     private void initComponents() {
 
         crearButton = new javax.swing.JButton();
+        cancelarButton = new javax.swing.JButton();
         panel = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        regresarButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        fechaField = new javax.swing.JFormattedTextField();
         agregarInsumoButton = new javax.swing.JButton();
 
         crearButton.setText("Crear Compra");
+        crearButton.addActionListener(this::crearButtonActionPerformed);
+
+        cancelarButton.setText("Cancelar");
+        cancelarButton.addActionListener(this::cancelarButtonActionPerformed);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -67,16 +97,12 @@ public class PanelCompraInsumo extends javax.swing.JPanel {
         });
         panel.setViewportView(jTable1);
 
-        regresarButton.setText("Regresar");
-        regresarButton.addActionListener(this::regresarButtonActionPerformed);
-
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Detalles de la Compra de Insumos");
 
         jLabel2.setText("Fecha de la compra");
 
-        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
-        jFormattedTextField1.setText("01/01/2000");
+        fechaField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
 
         agregarInsumoButton.setText("Agregar Insumo");
         agregarInsumoButton.addActionListener(this::agregarInsumoButtonActionPerformed);
@@ -96,14 +122,14 @@ public class PanelCompraInsumo extends javax.swing.JPanel {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(fechaField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(agregarInsumoButton))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(crearButton)
                                     .addGap(18, 18, 18)
-                                    .addComponent(regresarButton))
+                                    .addComponent(cancelarButton))
                                 .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
@@ -116,36 +142,59 @@ public class PanelCompraInsumo extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(fechaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(agregarInsumoButton)))
                 .addGap(18, 18, 18)
                 .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(regresarButton)
+                    .addComponent(cancelarButton)
                     .addComponent(crearButton))
                 .addGap(20, 20, 20))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void regresarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresarButtonActionPerformed
+    private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed
         frame.cambiarALista();
-    }//GEN-LAST:event_regresarButtonActionPerformed
+    }//GEN-LAST:event_cancelarButtonActionPerformed
 
     private void agregarInsumoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarInsumoButtonActionPerformed
-        PanelDetalleCompra panel = new PanelDetalleCompra(frame, this);
-        frame.cambiarPanel(panel);
+        compra.setFecha(LocalDate.parse(fechaField.getText(), formato));
+        frame.cambiarADetalleCompra(compra);
     }//GEN-LAST:event_agregarInsumoButtonActionPerformed
 
+    private void crearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearButtonActionPerformed
+        try {
+            compra.setFecha(LocalDate.parse(fechaField.getText(), formato));
+            frame.databaseCompra.agregarCompraInsumo(compra);
+            DetalleCompra[] detalles = compra.getDetalleCompras();
+            for (DetalleCompra detalle : detalles) {
+                agregarInsumoYDetalle(detalle);
+            }
+            JOptionPane.showMessageDialog(this, "Se a agregado la compra de insumos con exito.", "Completado", JOptionPane.OK_OPTION);
+            frame.cambiarALista();
+        } catch (DataBaseException | FormatoDatosException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_crearButtonActionPerformed
+
+    private void agregarInsumoYDetalle(DetalleCompra detalleCompra) throws DataBaseException, FormatoDatosException {
+        frame.databaseCompra.agregarDetalleCompra(detalleCompra);
+        Insumo insumo = frame.database.pedirInsumo(detalleCompra.getCodigoInsumo());
+        insumo.setStock(insumo.getStock() + detalleCompra.getCantidad());
+        insumo.setCosto(detalleCompra.getCosto());
+        frame.database.editarInsumo(insumo);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregarInsumoButton;
+    private javax.swing.JButton cancelarButton;
     private javax.swing.JButton crearButton;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
+    private javax.swing.JFormattedTextField fechaField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTable jTable1;
     private javax.swing.JScrollPane panel;
-    private javax.swing.JButton regresarButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -19,6 +19,9 @@ public class PanelDatosInsumo extends javax.swing.JPanel {
 
     /**
      * Creates new form PanelDatosInsumo
+     * @param frame
+     * @param modo
+     * @param insumo
      */
     public PanelDatosInsumo(InternalFrameInsumos frame, String modo, Insumo insumo) {
         this.frame = frame;

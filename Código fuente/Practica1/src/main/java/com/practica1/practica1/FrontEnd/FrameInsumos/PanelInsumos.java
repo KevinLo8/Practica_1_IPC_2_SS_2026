@@ -20,6 +20,7 @@ public class PanelInsumos extends javax.swing.JPanel {
 
     /**
      * Creates new form PanelInsumos
+     * @param frame
      */
     public PanelInsumos(InternalFrameInsumos frame) {
         this.frame = frame;
@@ -104,7 +105,7 @@ public class PanelInsumos extends javax.swing.JPanel {
     }//GEN-LAST:event_agregarButtonActionPerformed
 
     private void compraButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_compraButtonActionPerformed
-        frame.cambiarACompra();
+        frame.cambiarACompra(null);
     }//GEN-LAST:event_compraButtonActionPerformed
 
 

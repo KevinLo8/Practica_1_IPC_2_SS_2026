@@ -4,6 +4,7 @@
  */
 package com.practica1.practica1.FrontEnd.FrameInsumos;
 
+import BackEnd.CompraInsumo.*;
 import BackEnd.Exceptions.*;
 import BackEnd.Insumo.Insumo;
 import javax.swing.DefaultComboBoxModel;
@@ -16,15 +17,17 @@ import javax.swing.JOptionPane;
 public class PanelDetalleCompra extends javax.swing.JPanel {
 
     private InternalFrameInsumos frame;
-    private PanelCompraInsumo panel;
+    private CompraInsumo compra;
     private DefaultComboBoxModel modelo;
 
     /**
      * Creates new form PanelDetalleCompra
+     * @param frame
+     * @param compraInsumo
      */
-    public PanelDetalleCompra(InternalFrameInsumos frameIn, PanelCompraInsumo panelIn) {
-        frame = frameIn;
-        panel = panelIn;
+    public PanelDetalleCompra(InternalFrameInsumos frame, CompraInsumo compraInsumo) {
+        this.frame = frame;
+        compra = compraInsumo;
         try {
             Insumo[] lista = frame.database.pedirListado();
             Object[] listado = frame.operador.convertirListaInsumosCodigo(lista);
@@ -49,7 +52,7 @@ public class PanelDetalleCompra extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         medidaField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        editarButton = new javax.swing.JButton();
+        agregarButton = new javax.swing.JButton();
         nombreField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         codigoComboBox = new javax.swing.JComboBox<>();
@@ -71,8 +74,8 @@ public class PanelDetalleCompra extends javax.swing.JPanel {
 
         jLabel2.setText("Código");
 
-        editarButton.setText("Editar");
-        editarButton.addActionListener(this::editarButtonActionPerformed);
+        agregarButton.setText("Agregar");
+        agregarButton.addActionListener(this::agregarButtonActionPerformed);
 
         nombreField.setEditable(false);
         nombreField.setBackground(new java.awt.Color(255, 255, 255));
@@ -105,7 +108,7 @@ public class PanelDetalleCompra extends javax.swing.JPanel {
                         .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(editarButton)
+                                .addComponent(agregarButton)
                                 .addGap(18, 18, 18)
                                 .addComponent(regresarButton2))
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -116,18 +119,12 @@ public class PanelDetalleCompra extends javax.swing.JPanel {
                                     .addComponent(nombreField, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
                                     .addComponent(cantidadField, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(20, 20, 20)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(20, 20, 20)
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGap(20, 20, 20)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(medidaField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(20, 20, 20)
-                                        .addComponent(costoField))))))
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(medidaField, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(costoField)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(144, 144, 144)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -161,29 +158,35 @@ public class PanelDetalleCompra extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(regresarButton2)
-                    .addComponent(editarButton))
+                    .addComponent(agregarButton))
                 .addGap(20, 20, 20))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void regresarButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresarButton2ActionPerformed
-        frame.cambiarPanel(panel);
+        frame.cambiarACompra(compra);
     }//GEN-LAST:event_regresarButton2ActionPerformed
 
-    private void editarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarButtonActionPerformed
+    private void agregarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarButtonActionPerformed
         if (codigoComboBox.getSelectedIndex() != -1) {
             int cantidad = Integer.parseInt(cantidadField.getText());
             double costo = Double.parseDouble(costoField.getText());
             if (cantidad > 0 && costo > 0) {
-                panel.agregarInsumo((String) codigoComboBox.getSelectedItem(), nombreField.getText(), cantidadField.getText(), costoField.getText());
-                frame.cambiarPanel(panel);
+                try {
+                    String codigo = frame.operadorCompra.crearCodigoDetalle(compra.getDetalleCompras(), frame.databaseCompra);
+                    DetalleCompra detalle = new DetalleCompra(codigo, compra.getCodigo(), (String) codigoComboBox.getSelectedItem(), nombreField.getText(), cantidad, costo);
+                    compra.agregarDetalle(detalle);
+                    frame.cambiarACompra(compra);
+                } catch (DataExistenteException | FormatoDatosException | DataBaseException e) {
+                    JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
             } else {
                 JOptionPane.showMessageDialog(this, "Ingrese una cantidad y/o costo mayor a 0.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog(this, "Seleccione algún insumo.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_editarButtonActionPerformed
+    }//GEN-LAST:event_agregarButtonActionPerformed
 
     private void codigoComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_codigoComboBoxItemStateChanged
         if (codigoComboBox.getSelectedIndex() != -1) {
@@ -202,10 +205,10 @@ public class PanelDetalleCompra extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton agregarButton;
     private javax.swing.JFormattedTextField cantidadField;
     private javax.swing.JComboBox<String> codigoComboBox;
     private javax.swing.JFormattedTextField costoField;
-    private javax.swing.JButton editarButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -214,8 +217,6 @@ public class PanelDetalleCompra extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JTextField medidaField;
     private javax.swing.JTextField nombreField;
-    private javax.swing.JButton regresarButton;
-    private javax.swing.JButton regresarButton1;
     private javax.swing.JButton regresarButton2;
     // End of variables declaration//GEN-END:variables
 }

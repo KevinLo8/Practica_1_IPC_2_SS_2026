@@ -24,11 +24,11 @@ public class Insumo {
 
     
     
-    private String codigo;
-    private String nombre;
-    private String unidadMedida;
+    private final String codigo;
+    private final String nombre;
+    private final String unidadMedida;
     private int stock;
-    private int stockMinimo;
+    private final int stockMinimo;
     private double costo;
 
     public String getCodigo() {
@@ -69,4 +69,14 @@ public class Insumo {
             throw new FormatoDatosException("Ingrese una unidad de medida de tamaño menor de 50.");
         }
     }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public void setCosto(double costo) {
+        this.costo = costo;
+    }
+    
+    
 }

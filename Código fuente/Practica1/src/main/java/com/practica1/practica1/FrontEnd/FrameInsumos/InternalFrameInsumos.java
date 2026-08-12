@@ -4,7 +4,8 @@
  */
 package com.practica1.practica1.FrontEnd.FrameInsumos;
 
-import BackEnd.DataBase.InsumoDB;
+import BackEnd.CompraInsumo.*;
+import BackEnd.DataBase.*;
 import BackEnd.Exceptions.DataBaseException;
 import BackEnd.Insumo.*;
 import java.awt.BorderLayout;
@@ -19,6 +20,8 @@ public final class InternalFrameInsumos extends javax.swing.JInternalFrame {
 
     public InsumoDB database;
     public OperadorInsumo operador;
+    public CompraInsumoDB databaseCompra;
+    public OperadorCompraInsumo operadorCompra;
 
     /**
      * Creates new form InternalFrameInsumos
@@ -27,7 +30,9 @@ public final class InternalFrameInsumos extends javax.swing.JInternalFrame {
         initComponents();
         try {
             database = new InsumoDB();
+            databaseCompra = new CompraInsumoDB();
             operador = new OperadorInsumo();
+            operadorCompra = new OperadorCompraInsumo();
             cambiarALista();
             setVisible(true);
         } catch (DataBaseException e) {
@@ -35,7 +40,7 @@ public final class InternalFrameInsumos extends javax.swing.JInternalFrame {
         }
     }
 
-    public void cambiarPanel(JPanel panel) {
+    private void cambiarPanel(JPanel panel) {
         jPanel1.removeAll();
         jPanel1.setLayout(new BorderLayout());
         jPanel1.add(panel);
@@ -59,8 +64,14 @@ public final class InternalFrameInsumos extends javax.swing.JInternalFrame {
         
     }
     
-    public void cambiarACompra() {
-        PanelCompraInsumo panel = new PanelCompraInsumo(this);
+    public void cambiarACompra(CompraInsumo compra) {
+        PanelCompraInsumo panel = new PanelCompraInsumo(this, compra);
+        cambiarPanel(panel);
+        
+    }
+    
+    public void cambiarADetalleCompra(CompraInsumo compra) {
+        PanelDetalleCompra panel = new PanelDetalleCompra(this, compra);
         cambiarPanel(panel);
         
     }
