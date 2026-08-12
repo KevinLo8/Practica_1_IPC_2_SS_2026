@@ -4,10 +4,10 @@
  */
 package com.practica1.practica1.FrontEnd.FrameEmpleados;
 
-import BackEnd.DataBase.EmpleadoDB;
-import BackEnd.Empleado.Empleado;
-import BackEnd.Empleado.OperadorEmpleado;
-import BackEnd.Exceptions.*;
+import com.practica1.practica1.BackEnd.DataBase.EmpleadoDB;
+import com.practica1.practica1.BackEnd.Empleado.Empleado;
+import com.practica1.practica1.BackEnd.Empleado.OperadorEmpleado;
+import com.practica1.practica1.BackEnd.Exceptions.*;
 import java.awt.BorderLayout;
 import javax.swing.*;
 

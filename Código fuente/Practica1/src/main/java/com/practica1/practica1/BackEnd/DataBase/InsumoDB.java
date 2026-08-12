@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package BackEnd.DataBase;
+package com.practica1.practica1.BackEnd.DataBase;
 
-import BackEnd.Exceptions.*;
-import BackEnd.Insumo.Insumo;
+import com.practica1.practica1.BackEnd.Exceptions.*;
+import com.practica1.practica1.BackEnd.Insumo.Insumo;
 import java.sql.*;
 
 /**

@@ -4,8 +4,8 @@
  */
 package com.practica1.practica1.FrontEnd.FrameEmpleados;
 
-import BackEnd.Empleado.Empleado;
-import BackEnd.Exceptions.*;
+import com.practica1.practica1.BackEnd.Empleado.Empleado;
+import com.practica1.practica1.BackEnd.Exceptions.*;
 import javax.swing.*;
 
 /**

@@ -4,10 +4,10 @@
  */
 package com.practica1.practica1.FrontEnd.FrameInsumos;
 
-import BackEnd.CompraInsumo.*;
-import BackEnd.DataBase.*;
-import BackEnd.Exceptions.DataBaseException;
-import BackEnd.Insumo.*;
+import com.practica1.practica1.BackEnd.CompraInsumo.*;
+import com.practica1.practica1.BackEnd.DataBase.*;
+import com.practica1.practica1.BackEnd.Exceptions.DataBaseException;
+import com.practica1.practica1.BackEnd.Insumo.*;
 import java.awt.BorderLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
