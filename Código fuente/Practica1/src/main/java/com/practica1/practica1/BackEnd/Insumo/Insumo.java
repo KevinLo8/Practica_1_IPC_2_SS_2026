@@ -12,49 +12,47 @@ import com.practica1.practica1.BackEnd.Exceptions.FormatoDatosException;
  */
 public class Insumo {
 
-    public Insumo(String codigo, String nombre, String unidadMedida, int stock, int stockMinimo, double costo) throws FormatoDatosException {
+    private final String CODIGO;
+    private final String NOMBRE;
+    private final String UNIDAD_DE_MEDIDA;
+    private double stock;
+    private final double STOCK_MINIMO;
+    private double costo;
+
+    public Insumo(String codigo, String nombre, String unidadMedida, double stock, double stockMinimo, double costo) throws FormatoDatosException {
         revisarDatos(codigo, nombre, unidadMedida);
-        this.codigo = codigo;
-        this.nombre = nombre.substring(0, 1).toUpperCase() + nombre.substring(1).toLowerCase();
-        this.unidadMedida = unidadMedida.toUpperCase();
+        CODIGO = codigo;
+        NOMBRE = nombre.substring(0, 1).toUpperCase() + nombre.substring(1).toLowerCase();
+        UNIDAD_DE_MEDIDA = unidadMedida.toUpperCase();
         this.stock = stock;
-        this.stockMinimo = stockMinimo;
+        STOCK_MINIMO = stockMinimo;
         this.costo = costo;
     }
 
-    
-    
-    private final String codigo;
-    private final String nombre;
-    private final String unidadMedida;
-    private int stock;
-    private final int stockMinimo;
-    private double costo;
-
     public String getCodigo() {
-        return codigo;
+        return CODIGO;
     }
 
     public String getNombre() {
-        return nombre;
+        return NOMBRE;
     }
 
     public String getUnidadMedida() {
-        return unidadMedida;
+        return UNIDAD_DE_MEDIDA;
     }
 
-    public int getStock() {
+    public double getStock() {
         return stock;
     }
 
-    public int getStockMinimo() {
-        return stockMinimo;
+    public double getStockMinimo() {
+        return STOCK_MINIMO;
     }
 
     public double getCosto() {
         return costo;
     }
-    
+
     private void revisarDatos(String codigo, String nombre, String unidadMedida) throws FormatoDatosException {
         if (!codigo.matches("^I\\d{4}$")) {
             throw new FormatoDatosException("Formato de codigo incorrecto.");
@@ -70,13 +68,12 @@ public class Insumo {
         }
     }
 
-    public void setStock(int stock) {
+    public void setStock(double stock) {
         this.stock = stock;
     }
 
     public void setCosto(double costo) {
         this.costo = costo;
     }
-    
-    
+
 }

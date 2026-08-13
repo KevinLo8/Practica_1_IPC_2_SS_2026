@@ -12,48 +12,48 @@ import com.practica1.practica1.BackEnd.Exceptions.FormatoDatosException;
  */
 public class DetalleCompra {
 
-    private final String codigo;
-    private final String codigoCompra;
-    private final String codigoInsumo;
-    private final String nombreInsumo;
-    private final int cantidad;
-    private final double costo;
+    private final String CODIGO;
+    private final String CODIGO_COMPRA;
+    private final String CODIGO_INSUMO;
+    private final String NOMBRE_INSUMO;
+    private final double CANTIDAD;
+    private final double COSTO;
 
-    public DetalleCompra(String codigo, String codigoCompra, String codigoInsumo, String nombreInsumo, int cantidad, double costo) throws FormatoDatosException {
+    public DetalleCompra(String codigo, String codigoCompra, String codigoInsumo, String nombreInsumo, double cantidad, double costo) throws FormatoDatosException {
         revisarDatos(cantidad, costo);
-        this.codigo = codigo;
-        this.codigoCompra = codigoCompra;
-        this.codigoInsumo = codigoInsumo;
-        this.nombreInsumo = nombreInsumo;
-        this.cantidad = cantidad;
-        this.costo = costo;
+        CODIGO = codigo;
+        CODIGO_COMPRA = codigoCompra;
+        CODIGO_INSUMO = codigoInsumo;
+        NOMBRE_INSUMO = nombreInsumo;
+        CANTIDAD = cantidad;
+        COSTO = costo;
     }
 
     public String getCodigo() {
-        return codigo;
+        return CODIGO;
     }
 
     public String getCodigoCompra() {
-        return codigoCompra;
+        return CODIGO_COMPRA;
     }
     
     public String getCodigoInsumo() {
-        return codigoInsumo;
+        return CODIGO_INSUMO;
     }
 
     public String getNombreInsumo() {
-        return nombreInsumo;
+        return NOMBRE_INSUMO;
     }
 
-    public int getCantidad() {
-        return cantidad;
+    public double getCantidad() {
+        return CANTIDAD;
     }
 
     public double getCosto() {
-        return costo;
+        return COSTO;
     }
     
-        private void revisarDatos(int cantidad, double costo) throws FormatoDatosException {
+        private void revisarDatos(double cantidad, double costo) throws FormatoDatosException {
         if (cantidad <= 0) {
             throw new FormatoDatosException("Ingrese una cantidad mayor a 0.");
         }

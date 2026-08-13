@@ -27,7 +27,7 @@ public class InsumoDB extends ConexionDB {
             
             if (resultSet.next()) {
                 Insumo insumo = new Insumo(resultSet.getString("código"), resultSet.getString("nombre"), resultSet.getString("unidad_de_medida"),
-                        resultSet.getInt("cantidad_stock"), resultSet.getInt("stock_minimo"), resultSet.getDouble("costo"));
+                        resultSet.getDouble("cantidad_stock"), resultSet.getDouble("stock_minimo"), resultSet.getDouble("costo"));
                 return insumo;
             } else {
                 throw new DataBaseException("No se ha encontrado el insumo con el código seleccionado.");
@@ -49,7 +49,7 @@ public class InsumoDB extends ConexionDB {
 
                 Insumo[] listaTemp = new Insumo[index + 1];
                 Insumo insumo = new Insumo(resultSet.getString("código"), resultSet.getString("nombre"), resultSet.getString("unidad_de_medida"),
-                        resultSet.getInt("cantidad_stock"), resultSet.getInt("stock_minimo"), resultSet.getDouble("costo"));
+                        resultSet.getDouble("cantidad_stock"), resultSet.getDouble("stock_minimo"), resultSet.getDouble("costo"));
 
                 System.arraycopy(lista, 0, listaTemp, 0, index);
                 listaTemp[index] = insumo;
@@ -83,8 +83,8 @@ public class InsumoDB extends ConexionDB {
             preparedStatement.setString(1, insumo.getCodigo());
             preparedStatement.setString(2, insumo.getNombre());
             preparedStatement.setString(3, insumo.getUnidadMedida());
-            preparedStatement.setInt(4, insumo.getStock());
-            preparedStatement.setInt(5, insumo.getStockMinimo());
+            preparedStatement.setDouble(4, insumo.getStock());
+            preparedStatement.setDouble(5, insumo.getStockMinimo());
             preparedStatement.setDouble(6, insumo.getCosto());
 
             int rowsAffected = preparedStatement.executeUpdate();
@@ -102,8 +102,8 @@ public class InsumoDB extends ConexionDB {
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, insumo.getNombre());
             preparedStatement.setString(2, insumo.getUnidadMedida());
-            preparedStatement.setInt(3, insumo.getStock());
-            preparedStatement.setInt(4, insumo.getStockMinimo());
+            preparedStatement.setDouble(3, insumo.getStock());
+            preparedStatement.setDouble(4, insumo.getStockMinimo());
             preparedStatement.setDouble(5, insumo.getCosto());
             preparedStatement.setString(6, insumo.getCodigo());
 
