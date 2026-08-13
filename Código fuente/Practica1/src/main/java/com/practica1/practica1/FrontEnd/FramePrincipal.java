@@ -6,23 +6,20 @@ package com.practica1.practica1.FrontEnd;
 
 import com.practica1.practica1.FrontEnd.FrameEmpleados.InternalFrameEmpleados;
 import com.practica1.practica1.FrontEnd.FrameInsumos.InternalFrameInsumos;
-
+import com.practica1.practica1.FrontEnd.FrameProductos.InternalFrameProductos;
 
 /**
  *
  * @author Kevin
  */
 public class FramePrincipal extends javax.swing.JFrame {
-    
+
     /**
      * Creates new form Frame_Principal
      */
     public FramePrincipal() {
         initComponents();
     }
-
-
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -38,13 +35,14 @@ public class FramePrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         crearCuentaItem = new javax.swing.JMenuItem();
+        menúItem = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         salirItem = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         empleadosItem = new javax.swing.JMenuItem();
         nóminaItem = new javax.swing.JMenuItem();
         inventarioItem = new javax.swing.JMenuItem();
-        MenúItem = new javax.swing.JMenuItem();
+        productosItem = new javax.swing.JMenuItem();
         mesasItem = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         reporteFlujoItem = new javax.swing.JMenuItem();
@@ -89,6 +87,9 @@ public class FramePrincipal extends javax.swing.JFrame {
             }
         });
         jMenu1.add(crearCuentaItem);
+
+        menúItem.setText("Menú");
+        jMenu1.add(menúItem);
         jMenu1.add(jSeparator1);
 
         salirItem.setText("Salir");
@@ -122,8 +123,13 @@ public class FramePrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(inventarioItem);
 
-        MenúItem.setText("Menú");
-        jMenu2.add(MenúItem);
+        productosItem.setText("Productos");
+        productosItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                productosItemActionPerformed(evt);
+            }
+        });
+        jMenu2.add(productosItem);
 
         mesasItem.setText("Mesas");
         jMenu2.add(mesasItem);
@@ -181,8 +187,14 @@ public class FramePrincipal extends javax.swing.JFrame {
         jDesktopPane1.repaint();
     }//GEN-LAST:event_inventarioItemActionPerformed
 
+    private void productosItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productosItemActionPerformed
+        InternalFrameProductos frame = new InternalFrameProductos();
+        frame.setLocation((jDesktopPane1.getWidth() - 750) / 2, (jDesktopPane1.getHeight() - 550) / 2);
+        jDesktopPane1.add(frame);
+        jDesktopPane1.repaint();
+    }//GEN-LAST:event_productosItemActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem MenúItem;
     private javax.swing.JMenuItem crearCuentaItem;
     private javax.swing.JMenuItem empleadosItem;
     private javax.swing.JMenuItem inventarioItem;
@@ -193,8 +205,10 @@ public class FramePrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JMenuItem menúItem;
     private javax.swing.JMenuItem mesasItem;
     private javax.swing.JMenuItem nóminaItem;
+    private javax.swing.JMenuItem productosItem;
     private javax.swing.JMenuItem reporteFlujoItem;
     private javax.swing.JMenuItem reporteInsumoItem;
     private javax.swing.JMenuItem reporteProductoItem;
