@@ -213,8 +213,8 @@ public class PanelDatosInsumo extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(this, "Se a agregado el insumo con exito.", "Completado", JOptionPane.OK_OPTION);
                 }
                 case "Editar" -> {
-                    insumo = new Insumo(codigoField.getText(), nombreField.getText(), medidaField.getText(), Integer.parseInt(stockField.getText()),
-                            Integer.parseInt(stockMinimoField.getText()), Double.parseDouble(costoField.getText()));
+                    insumo = new Insumo(codigoField.getText(), nombreField.getText(), medidaField.getText(), Double.parseDouble(stockField.getText()),
+                            Double.parseDouble(stockMinimoField.getText()), Double.parseDouble(costoField.getText()));
                     frame.database.editarInsumo(insumo);
                     JOptionPane.showMessageDialog(this, "Se a editado el insumo con exito.", "Completado", JOptionPane.OK_OPTION);
                 }

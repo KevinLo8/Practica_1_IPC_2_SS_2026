@@ -242,19 +242,22 @@ public class PanelInsumoReceta extends javax.swing.JPanel {
     private void codigoComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_codigoComboBoxItemStateChanged
         if (codigoComboBox.getSelectedIndex() != -1) {
             try {
-                Insumo insumo = database.pedirInsumo((String) codigoComboBox.getSelectedItem());
+                int index = codigoComboBox.getSelectedIndex() - 1;
+                Insumo insumo = null;
+                if (!MODO.equals("Agregar")) {
+                    Receta receta = PRODUCTO.getReceta()[index];
+                    insumo = database.pedirInsumo(receta.getCodigoInsumo());
+                    String cantidadString = String.valueOf(PRODUCTO.getReceta()[index].getCantidad());
+                    cantidadField.setText(cantidadString);
+                } else {
+                    insumo = database.pedirInsumo((String) codigoComboBox.getSelectedItem());
+                    cantidadField.setText("0.00");
+                }
                 nombreField.setText(insumo.getNombre());
                 medidaField.setText(insumo.getUnidadMedida());
                 stockField.setText(String.valueOf(insumo.getStock()));
                 stockMinimoField.setText(String.valueOf(insumo.getStockMinimo()));
                 costoField.setText(String.valueOf(insumo.getCosto()));
-                if (!MODO.equals("Agregar")) {
-                    int index = codigoComboBox.getSelectedIndex() - 1;
-                    String cantidadString = String.valueOf(PRODUCTO.getReceta()[index].getCantidad());
-                    cantidadField.setText(cantidadString);
-                } else {
-                    cantidadField.setText("0.00");
-                }
             } catch (DataBaseException | FormatoDatosException e) {
                 JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -269,22 +272,26 @@ public class PanelInsumoReceta extends javax.swing.JPanel {
     }//GEN-LAST:event_codigoComboBoxItemStateChanged
 
     private void accionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accionButtonActionPerformed
-        try {
-            switch (MODO) {
-                case "Agregar" ->
-                    agregarInsumo();
-                case "Editar" -> {
-                    corroborarInsumo();
-                    editarInsumo();
+        if (codigoComboBox.getSelectedIndex() != -1) {
+            try {
+                switch (MODO) {
+                    case "Agregar" -> {
+                        corroborarInsumo();
+                        agregarInsumo();
+                    }
+                    case "Editar" -> {
+                        editarInsumo();
+                    }
+                    case "Eliminar" -> {
+                        eliminarInsumo();
+                    }
                 }
-                case "Eliminar" -> {
-                    corroborarInsumo();
-                    eliminarInsumo();
-                }
+                FRAME.cambiarADatos(MODO_PRODUCTO, PRODUCTO);
+            } catch (DataBaseException | FormatoDatosException | DataExistenteException e) {
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
-            FRAME.cambiarADatos(MODO_PRODUCTO, PRODUCTO);
-        } catch (DataBaseException | FormatoDatosException | DataExistenteException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Seleccione algún insumo.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_accionButtonActionPerformed
 
@@ -298,18 +305,18 @@ public class PanelInsumoReceta extends javax.swing.JPanel {
     private void agregarInsumo() throws DataBaseException, DataExistenteException {
         String codigo = FRAME.operadorReceta.crearCodigo(PRODUCTO.getReceta(), FRAME.databaseReceta);
         Receta receta = new Receta(codigo, PRODUCTO.getCodigo(), (String) codigoComboBox.getSelectedItem(), nombreField.getText(),
-                Integer.parseInt(cantidadField.getText()), medidaField.getText());
+                Double.parseDouble(cantidadField.getText()), medidaField.getText());
         PRODUCTO.agregarInsumo(receta);
     }
 
     private void editarInsumo() {
         int index = codigoComboBox.getSelectedIndex() - 1;
-        PRODUCTO.getReceta()[index].setCantidad(Integer.parseInt(cantidadField.getText()));   
+        PRODUCTO.getReceta()[index].setCantidad(Double.parseDouble(cantidadField.getText()));
     }
 
     private void eliminarInsumo() throws DataBaseException {
         int index = codigoComboBox.getSelectedIndex() - 1;
-        PRODUCTO.eliminarInsumo(index);   
+        PRODUCTO.eliminarInsumo(index);
     }
 
     private void regresarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresarButtonActionPerformed

@@ -61,7 +61,7 @@ public class Receta {
         this.nombre = nombre;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(double cantidad) {
         this.cantidad = cantidad;
     }
 

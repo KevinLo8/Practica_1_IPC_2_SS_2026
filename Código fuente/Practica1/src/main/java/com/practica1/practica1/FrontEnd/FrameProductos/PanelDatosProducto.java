@@ -242,26 +242,31 @@ public class PanelDatosProducto extends javax.swing.JPanel {
 
     private void eliminarRecetas() throws DataBaseException, FormatoDatosException {
         Receta[] recetasExistentes = frame.operadorReceta.crearReceta(producto.getCodigo(), frame.databaseReceta);
-        for (Receta recetasExistente : recetasExistentes) {
-            if (!revisarReceta(recetasExistente.getCodigo())) {
-                frame.databaseReceta.eliminarReceta(recetasExistente.getCodigo());
+        for (Receta receta : recetasExistentes) {
+            if (!revisarReceta(receta.getCodigo(), producto.getReceta())) {
+                frame.databaseReceta.eliminarReceta(receta.getCodigo());
             }
         }
     }
 
-    private boolean revisarReceta(String codigo) {
+    private void editarRecetas() throws DataBaseException, FormatoDatosException {
+        Receta[] recetasExistentes = frame.operadorReceta.crearReceta(producto.getCodigo(), frame.databaseReceta);
         for (Receta receta : producto.getReceta()) {
+            if (revisarReceta(receta.getCodigo(), recetasExistentes)) {
+                frame.databaseReceta.editarReceta(receta);
+            } else {
+                frame.databaseReceta.agregarReceta(receta);
+            }
+        }
+    }
+
+    private boolean revisarReceta(String codigo, Receta[] recetaARevisar) {
+        for (Receta receta : recetaARevisar) {
             if (codigo.equals(receta.getCodigo())) {
                 return true;
             }
         }
         return false;
-    }
-
-    private void editarRecetas() throws DataBaseException {
-        for (Receta receta : producto.getReceta()) {
-            frame.databaseReceta.editarReceta(receta);
-        }
     }
 
     private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed

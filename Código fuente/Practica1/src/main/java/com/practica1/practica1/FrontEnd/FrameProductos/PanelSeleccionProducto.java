@@ -179,22 +179,13 @@ public class PanelSeleccionProducto extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void seleccionarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seleccionarButtonActionPerformed
-        /*try {
-            guardarDatos();
-            switch (MODO) {
-                case "Crear" -> {
-                    frame.database.agregarProducto(producto);
-                    guardarReceta();
-                }
-                case "Editar" -> {
-                    frame.database.editarProducto(producto);
-                    editarReceta();
-                }
-            }
-            frame.cambiarALista();
+        try {
+            Producto producto = FRAME.database.pedirProducto((String) codigoComboBox.getSelectedItem());
+            producto.setRecetario(FRAME.operadorReceta.crearReceta(producto.getCodigo(), FRAME.databaseReceta));
+            FRAME.cambiarADatos("Editar", producto);
         } catch (DataBaseException | FormatoDatosException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }*/
+        }
     }//GEN-LAST:event_seleccionarButtonActionPerformed
 
     private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed
