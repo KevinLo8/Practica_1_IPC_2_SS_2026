@@ -4,6 +4,10 @@
  */
 package com.practica1.practica1.BackEnd.Empleado;
 
+import com.practica1.practica1.BackEnd.DataBase.EmpleadoDB;
+import com.practica1.practica1.BackEnd.Exceptions.DataBaseException;
+import com.practica1.practica1.BackEnd.Exceptions.DataExistenteException;
+
 /**
  *
  * @author Kevin
@@ -52,6 +56,12 @@ public class OperadorEmpleado {
             datos = datosTemp;
         }
         return datos;
+    }
+
+    public void revisarDPI(EmpleadoDB database, Empleado empleado) throws DataExistenteException, DataBaseException {
+        if (database.revisarDPI(empleado.getDpi())) {
+            throw new DataExistenteException("El DPI escrito ya está en uso ya esta en uso.");
+        }
     }
 
 }

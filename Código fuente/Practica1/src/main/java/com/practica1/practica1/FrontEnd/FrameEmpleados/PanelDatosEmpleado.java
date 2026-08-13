@@ -211,6 +211,7 @@ public class PanelDatosEmpleado extends javax.swing.JPanel {
                     (String) jornadaComboBox.getSelectedItem(), salario, LocalDate.parse(fechaField.getText(), formato), true);
             switch (MODO) {
                 case "Agregar" -> {
+                    frame.operador.revisarDPI(frame.database, empleado);
                     frame.database.agregarEmpleado(empleado);
                     JOptionPane.showMessageDialog(this, "Se a agregado el empleado con exito.", "Completado", JOptionPane.OK_OPTION);
                 }
@@ -220,7 +221,7 @@ public class PanelDatosEmpleado extends javax.swing.JPanel {
                 }
             }
             frame.cambiarALista();
-        } catch (DataBaseException | FormatoDatosException e) {
+        } catch (DataBaseException | FormatoDatosException | DataExistenteException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (DateTimeParseException e) {
             JOptionPane.showMessageDialog(this, "Ingrese una fecha de contratación valida.", "Error", JOptionPane.ERROR_MESSAGE);

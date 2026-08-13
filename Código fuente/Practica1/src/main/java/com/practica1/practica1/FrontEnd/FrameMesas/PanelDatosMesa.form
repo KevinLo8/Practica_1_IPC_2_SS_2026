@@ -30,12 +30,10 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="regresarButton" min="-2" pref="116" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jLabel3" alignment="0" max="32767" attributes="0"/>
-                              <Component id="numeroField" max="32767" attributes="0"/>
-                              <Component id="capacidadField" min="-2" pref="250" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jLabel3" alignment="0" max="32767" attributes="0"/>
+                          <Component id="numeroField" max="32767" attributes="0"/>
+                          <Component id="capacidadField" min="-2" pref="250" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>

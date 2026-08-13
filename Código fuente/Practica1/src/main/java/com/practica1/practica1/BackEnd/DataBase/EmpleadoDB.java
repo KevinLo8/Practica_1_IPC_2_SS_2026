@@ -119,4 +119,19 @@ public class EmpleadoDB extends ConexionDB {
             throw new DataBaseException("Error al cambiar el estado de habilitación del empleado.");
         }
     }
+
+    public boolean revisarDPI(String dpi) throws DataBaseException {
+        String query = "SELECT * FROM empleado WHERE dpi = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query);) {
+            preparedStatement.setString(1, dpi);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            return resultSet.next();
+
+        } catch (SQLException e) {
+            throw new DataBaseException("Error al revisar el DPI.");
+        }
+    }
+
 }
