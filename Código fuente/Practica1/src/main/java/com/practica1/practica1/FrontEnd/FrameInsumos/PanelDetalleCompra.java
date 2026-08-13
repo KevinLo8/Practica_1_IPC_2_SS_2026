@@ -92,8 +92,8 @@ public class PanelDetalleCompra extends javax.swing.JPanel {
 
         jLabel4.setText("Cantidad");
 
-        cantidadField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
-        cantidadField.setText("0");
+        cantidadField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        cantidadField.setText("0.00");
 
         costoField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         costoField.setText("0.00");
