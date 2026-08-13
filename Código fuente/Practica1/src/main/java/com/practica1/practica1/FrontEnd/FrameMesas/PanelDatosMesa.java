@@ -131,6 +131,7 @@ public class PanelDatosMesa extends javax.swing.JPanel {
             Mesa mesa = new Mesa(Integer.parseInt(numeroField.getText()), Integer.parseInt(capacidadField.getText()), "LIBRE");
             switch (MODO) {
                 case "Agregar" -> {
+                    FRAME.operador.revisarNumero(FRAME.database, mesa);
                     FRAME.database.agregarMesa(mesa);
                     JOptionPane.showMessageDialog(this, "Se a agregado la mesa con exito.", "Completado", JOptionPane.OK_OPTION);
                 }

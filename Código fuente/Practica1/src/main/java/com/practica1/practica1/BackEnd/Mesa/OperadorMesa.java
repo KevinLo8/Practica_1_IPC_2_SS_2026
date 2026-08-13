@@ -48,7 +48,7 @@ public class OperadorMesa {
 
     public void revisarNumero(MesaDB database, Mesa mesa) throws DataExistenteException, DataBaseException {
         if (database.revisarNumero(mesa.getNumero())) {
-            throw new DataExistenteException("El número de mesa seleccionado ya esta en uso.");
+            throw new DataExistenteException("El número de mesa seleccionado ya está en uso.");
         }
     }
 
