@@ -6,7 +6,9 @@ package com.practica1.practica1.FrontEnd;
 
 import com.practica1.practica1.FrontEnd.FrameEmpleados.InternalFrameEmpleados;
 import com.practica1.practica1.FrontEnd.FrameInsumos.InternalFrameInsumos;
+import com.practica1.practica1.FrontEnd.FrameMesas.InternalFrameMesas;
 import com.practica1.practica1.FrontEnd.FrameProductos.InternalFrameProductos;
+import javax.swing.JInternalFrame;
 
 /**
  *
@@ -132,6 +134,11 @@ public class FramePrincipal extends javax.swing.JFrame {
         jMenu2.add(productosItem);
 
         mesasItem.setText("Mesas");
+        mesasItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mesasItemActionPerformed(evt);
+            }
+        });
         jMenu2.add(mesasItem);
 
         jMenuBar1.add(jMenu2);
@@ -165,15 +172,19 @@ public class FramePrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void agregarFrame(JInternalFrame frame) {
+        frame.setLocation((jDesktopPane1.getWidth() - frame.getWidth()) / 2, (jDesktopPane1.getHeight() - frame.getHeight()) / 2);
+        jDesktopPane1.add(frame);
+        jDesktopPane1.repaint();
+    }
+
     private void crearCuentaItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearCuentaItemActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_crearCuentaItemActionPerformed
 
     private void empleadosItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empleadosItemActionPerformed
         InternalFrameEmpleados frame = new InternalFrameEmpleados();
-        frame.setLocation((jDesktopPane1.getWidth() - 700) / 2, (jDesktopPane1.getHeight() - 415) / 2);
-        jDesktopPane1.add(frame);
-        jDesktopPane1.repaint();
+        agregarFrame(frame);
     }//GEN-LAST:event_empleadosItemActionPerformed
 
     private void salirItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirItemActionPerformed
@@ -182,17 +193,18 @@ public class FramePrincipal extends javax.swing.JFrame {
 
     private void inventarioItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inventarioItemActionPerformed
         InternalFrameInsumos frame = new InternalFrameInsumos();
-        frame.setLocation((jDesktopPane1.getWidth() - 700) / 2, (jDesktopPane1.getHeight() - 415) / 2);
-        jDesktopPane1.add(frame);
-        jDesktopPane1.repaint();
+        agregarFrame(frame);
     }//GEN-LAST:event_inventarioItemActionPerformed
 
     private void productosItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productosItemActionPerformed
         InternalFrameProductos frame = new InternalFrameProductos();
-        frame.setLocation((jDesktopPane1.getWidth() - 750) / 2, (jDesktopPane1.getHeight() - 550) / 2);
-        jDesktopPane1.add(frame);
-        jDesktopPane1.repaint();
+        agregarFrame(frame);
     }//GEN-LAST:event_productosItemActionPerformed
+
+    private void mesasItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mesasItemActionPerformed
+        InternalFrameMesas frame = new InternalFrameMesas();
+        agregarFrame(frame);
+    }//GEN-LAST:event_mesasItemActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem crearCuentaItem;
