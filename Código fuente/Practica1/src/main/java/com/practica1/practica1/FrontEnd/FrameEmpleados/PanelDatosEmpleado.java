@@ -4,8 +4,8 @@
  */
 package com.practica1.practica1.FrontEnd.FrameEmpleados;
 
-import BackEnd.Empleado.Empleado;
-import BackEnd.Exceptions.*;
+import com.practica1.practica1.BackEnd.Empleado.Empleado;
+import com.practica1.practica1.BackEnd.Exceptions.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -64,6 +64,8 @@ public class PanelDatosEmpleado extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+
+        setPreferredSize(new java.awt.Dimension(676, 379));
 
         jLabel5.setText("Salario del empleado");
 
@@ -151,7 +153,7 @@ public class PanelDatosEmpleado extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(15, 15, 15)
                 .addComponent(header)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
@@ -178,7 +180,7 @@ public class PanelDatosEmpleado extends javax.swing.JPanel {
                     .addComponent(salarioField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(fechaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addGap(52, 52, 52)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(regresarButton)
                     .addComponent(accionButton))

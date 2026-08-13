@@ -35,6 +35,11 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="crearCuentaItemActionPerformed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="men&#xfa;Item">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Men&#xfa;"/>
+              </Properties>
+            </MenuItem>
             <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator1">
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="salirItem">
@@ -69,16 +74,25 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Inventario"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inventarioItemActionPerformed"/>
+              </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="Men&#xfa;Item">
+            <MenuItem class="javax.swing.JMenuItem" name="productosItem">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Men&#xfa;"/>
+                <Property name="text" type="java.lang.String" value="Productos"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="productosItemActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mesasItem">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Mesas"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mesasItemActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

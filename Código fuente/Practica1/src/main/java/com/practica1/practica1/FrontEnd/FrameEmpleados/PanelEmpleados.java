@@ -4,8 +4,8 @@
  */
 package com.practica1.practica1.FrontEnd.FrameEmpleados;
 
-import BackEnd.Empleado.Empleado;
-import BackEnd.Exceptions.*;
+import com.practica1.practica1.BackEnd.Empleado.Empleado;
+import com.practica1.practica1.BackEnd.Exceptions.*;
 import javax.swing.*;
 
 /**
@@ -58,6 +58,7 @@ public class PanelEmpleados extends javax.swing.JPanel {
 
         setMaximumSize(new java.awt.Dimension(676, 379));
         setMinimumSize(new java.awt.Dimension(676, 379));
+        setPreferredSize(new java.awt.Dimension(676, 379));
 
         panel.setAutoscrolls(true);
         panel.setViewportView(null);
@@ -88,7 +89,7 @@ public class PanelEmpleados extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(334, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(agregarButton)
                 .addGap(18, 18, 18)
                 .addComponent(editarButton)
@@ -98,7 +99,7 @@ public class PanelEmpleados extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(14, Short.MAX_VALUE)
                 .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGap(14, 14, 14))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
