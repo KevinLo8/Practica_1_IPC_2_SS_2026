@@ -4,8 +4,8 @@
  */
 package com.practica1.practica1.FrontEnd.FrameInsumos;
 
-import BackEnd.Exceptions.*;
-import BackEnd.Insumo.Insumo;
+import com.practica1.practica1.BackEnd.Exceptions.*;
+import com.practica1.practica1.BackEnd.Insumo.Insumo;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 

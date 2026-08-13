@@ -2,35 +2,39 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package com.practica1.practica1.FrontEnd.FrameInsumos;
+package com.practica1.practica1.FrontEnd.FrameProductos;
 
 import com.practica1.practica1.BackEnd.Exceptions.*;
-import com.practica1.practica1.BackEnd.Insumo.Insumo;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
+import com.practica1.practica1.BackEnd.Producto.Producto;
+import javax.swing.*;
 
 /**
  *
  * @author kevinl
  */
-public class PanelInsumos extends javax.swing.JPanel {
+public class PanelProductos extends javax.swing.JPanel {
 
-    private final String[] TITULOS = {"Código", "Nombre", "Unidad de medida", "Cantida de stock", "Stock mínimo", "Costo"};
-    private InternalFrameInsumos frame;
+    private final String[] TITULOS = {"Código", "Nombre", "Categoria", "Precio"};
+    private InternalFrameProductos frame;
 
     /**
-     * Creates new form PanelInsumos
+     * Creates new form PanelProductos
+     *
      * @param frame
      */
-    public PanelInsumos(InternalFrameInsumos frame) {
+    public PanelProductos(InternalFrameProductos frame) {
         this.frame = frame;
         initComponents();
+        initPanel();
+    }
+
+    private void initPanel() {
         try {
-            Insumo[] lista = frame.database.pedirListado();
-            crearTabla(frame.operador.convertirListaInsumos(lista));
+            Producto[] lista = frame.database.pedirListado();
+            crearTabla(frame.operador.convertirListaProductos(lista));
             setVisible(true);
         } catch (DataBaseException | FormatoDatosException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), "error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -52,46 +56,41 @@ public class PanelInsumos extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panel = new javax.swing.JScrollPane();
         editarButton = new javax.swing.JButton();
-        agregarButton = new javax.swing.JButton();
-        compraButton = new javax.swing.JButton();
+        crearButton = new javax.swing.JButton();
+        panel = new javax.swing.JScrollPane();
 
-        editarButton.setText("Editar");
+        setPreferredSize(new java.awt.Dimension(738, 514));
+
+        editarButton.setText("Editar Producto");
         editarButton.addActionListener(this::editarButtonActionPerformed);
 
-        agregarButton.setText("Agregar");
-        agregarButton.addActionListener(this::agregarButtonActionPerformed);
-
-        compraButton.setText("Crear Compra");
-        compraButton.addActionListener(this::compraButtonActionPerformed);
+        crearButton.setText("Crear Producto");
+        crearButton.addActionListener(this::crearButtonActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 698, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(compraButton)
+                        .addComponent(crearButton)
                         .addGap(18, 18, 18)
-                        .addComponent(agregarButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(editarButton))
-                    .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                        .addComponent(editarButton)))
+                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
+                .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(editarButton)
-                    .addComponent(agregarButton)
-                    .addComponent(compraButton))
+                    .addComponent(crearButton))
                 .addGap(20, 20, 20))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -100,18 +99,13 @@ public class PanelInsumos extends javax.swing.JPanel {
         frame.cambiarASeleccion();
     }//GEN-LAST:event_editarButtonActionPerformed
 
-    private void agregarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarButtonActionPerformed
-        frame.cambiarADatos("Agregar", null);
-    }//GEN-LAST:event_agregarButtonActionPerformed
-
-    private void compraButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_compraButtonActionPerformed
-        frame.cambiarACompra(null);
-    }//GEN-LAST:event_compraButtonActionPerformed
+    private void crearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearButtonActionPerformed
+        frame.cambiarADatos("Crear", null);
+    }//GEN-LAST:event_crearButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton agregarButton;
-    private javax.swing.JButton compraButton;
+    private javax.swing.JButton crearButton;
     private javax.swing.JButton editarButton;
     private javax.swing.JScrollPane panel;
     // End of variables declaration//GEN-END:variables

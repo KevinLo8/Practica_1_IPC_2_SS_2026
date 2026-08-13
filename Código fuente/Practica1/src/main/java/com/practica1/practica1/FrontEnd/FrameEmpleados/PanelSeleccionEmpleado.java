@@ -4,9 +4,9 @@
  */
 package com.practica1.practica1.FrontEnd.FrameEmpleados;
 
-import BackEnd.Empleado.Empleado;
-import BackEnd.Exceptions.DataBaseException;
-import BackEnd.Exceptions.FormatoDatosException;
+import com.practica1.practica1.BackEnd.Empleado.Empleado;
+import com.practica1.practica1.BackEnd.Exceptions.DataBaseException;
+import com.practica1.practica1.BackEnd.Exceptions.FormatoDatosException;
 import java.time.format.DateTimeFormatter;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;

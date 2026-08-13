@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package BackEnd.DataBase;
+package com.practica1.practica1.BackEnd.DataBase;
 
-import BackEnd.Exceptions.DataBaseException;
+import com.practica1.practica1.BackEnd.Exceptions.DataBaseException;
 import java.sql.*;
 
 /**
@@ -15,7 +15,7 @@ public class ConexionDB {
 
     private static final String IP = "localhost";
     private static final int PUERTO = 3306;
-    private static final String SCHEMA = "cafetería";
+    private static final String SCHEMA = "cafeteria";
     public static final String USER_NAME = "admindba";
     public static final String PASSWORD = "12345";
 

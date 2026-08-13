@@ -1,7 +1,7 @@
-package BackEnd.Insumo;
+package com.practica1.practica1.BackEnd.Insumo;
 
-import BackEnd.DataBase.InsumoDB;
-import BackEnd.Exceptions.DataBaseException;
+import com.practica1.practica1.BackEnd.DataBase.InsumoDB;
+import com.practica1.practica1.BackEnd.Exceptions.DataBaseException;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
