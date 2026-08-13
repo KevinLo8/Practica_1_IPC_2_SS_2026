@@ -41,7 +41,7 @@ public class CompraInsumoDB extends ConexionDB {
             preparedStatement.setString(1, detalleCompra.getCodigo());
             preparedStatement.setString(2, detalleCompra.getCodigoCompra());
             preparedStatement.setString(3, detalleCompra.getCodigoInsumo());
-            preparedStatement.setInt(4, detalleCompra.getCantidad());
+            preparedStatement.setDouble(4, detalleCompra.getCantidad());
             preparedStatement.setDouble(5, detalleCompra.getCosto());
 
             int rowsAffected = preparedStatement.executeUpdate();

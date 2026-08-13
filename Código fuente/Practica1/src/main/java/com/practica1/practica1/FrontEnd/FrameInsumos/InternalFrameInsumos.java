@@ -28,6 +28,10 @@ public final class InternalFrameInsumos extends javax.swing.JInternalFrame {
      */
     public InternalFrameInsumos() {
         initComponents();
+        initFrame();
+    }
+
+    private void initFrame() {
         try {
             database = new InsumoDB();
             databaseCompra = new CompraInsumoDB();
@@ -47,35 +51,35 @@ public final class InternalFrameInsumos extends javax.swing.JInternalFrame {
         jPanel1.revalidate();
         jPanel1.repaint();
     }
-    
+
     public void cambiarALista() {
         PanelInsumos panel = new PanelInsumos(this);
         cambiarPanel(panel);
     }
-    
-    public void cambiarADatos(String modo, Insumo insumo){
+
+    public void cambiarADatos(String modo, Insumo insumo) {
         PanelDatosInsumo panel = new PanelDatosInsumo(this, modo, insumo);
         cambiarPanel(panel);
     }
-    
+
     public void cambiarASeleccion() {
         PanelSeleccionInsumo panel = new PanelSeleccionInsumo(this);
         cambiarPanel(panel);
-        
+
     }
-    
+
     public void cambiarACompra(CompraInsumo compra) {
         PanelCompraInsumo panel = new PanelCompraInsumo(this, compra);
         cambiarPanel(panel);
-        
+
     }
-    
+
     public void cambiarADetalleCompra(CompraInsumo compra) {
         PanelDetalleCompra panel = new PanelDetalleCompra(this, compra);
         cambiarPanel(panel);
-        
+
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
