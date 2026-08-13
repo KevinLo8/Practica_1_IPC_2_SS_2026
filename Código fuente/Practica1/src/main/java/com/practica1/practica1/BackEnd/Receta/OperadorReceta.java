@@ -24,10 +24,10 @@ public class OperadorReceta {
 
             System.arraycopy(datos, 0, datosTemp, 0, index);
 
-            datosTemp[index][0] = receta.getCodigo();
+            datosTemp[index][0] = receta.getCodigoInsumo();
             datosTemp[index][1] = receta.getNombre();
             datosTemp[index][2] = receta.getCantidad();
-            datosTemp[index][6] = receta.getUnidadDeMedida();
+            datosTemp[index][3] = receta.getUnidadDeMedida();
 
             datos = datosTemp;
         }

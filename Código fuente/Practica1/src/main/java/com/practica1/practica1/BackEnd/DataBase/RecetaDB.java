@@ -39,7 +39,7 @@ public class RecetaDB extends ConexionDB {
         return lista;
     }
 
-        private Receta[] addReceta(Receta receta, Receta[] lista) throws SQLException, FormatoDatosException {
+    private Receta[] addReceta(Receta receta, Receta[] lista) throws SQLException, FormatoDatosException {
         int index = lista.length;
 
         Receta[] listaTemp = new Receta[index + 1];
@@ -50,7 +50,7 @@ public class RecetaDB extends ConexionDB {
         return listaTemp;
     }
 
-public void agregarReceta(Receta receta) throws DataBaseException {
+    public void agregarReceta(Receta receta) throws DataBaseException {
         String query = "INSERT INTO receta (código, código_producto, código_insumo, cantidad) VALUES (?, ?, ?, ?)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -85,7 +85,7 @@ public void agregarReceta(Receta receta) throws DataBaseException {
             throw new DataBaseException("Error al editar la receta.");
         }
     }
-    
+
     public void eliminarReceta(String codigo) throws DataBaseException {
         String query = "DELETE FROM receta WHERE código = ?";
 
@@ -100,7 +100,7 @@ public void agregarReceta(Receta receta) throws DataBaseException {
             throw new DataBaseException("Error al eliminar la receta.");
         }
     }
-    
+
     public boolean revisarCodigo(String codigo) throws DataBaseException {
         String query = "SELECT * FROM receta WHERE código = ?";
 
